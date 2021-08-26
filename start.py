@@ -1,18 +1,29 @@
-from sys import exit
+# Simple pygame program
 
+# Import and initialize the pygame library
 import pygame
-from pygame.locals import *
-
-import constants
-
-__author__ = 'Zygimantus'
-
-screen = pygame.display.set_mode(constants.SCREEN_SIZE, 0, 32)
-pygame.display.set_caption(constants.CAPTION)
 pygame.init()
 
-while True:
-    event = pygame.event.wait()
+# Set up the drawing window
+screen = pygame.display.set_mode([500, 500])
 
-    if event.type == QUIT:
-        exit()
+# Run until the user asks to quit
+running = True
+while running:
+
+    # Did the user click the window close button?
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Fill the background with white
+    screen.fill((255, 255, 255))
+
+    # Draw a solid blue circle in the center
+    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+
+    # Flip the display
+    pygame.display.flip()
+
+# Done! Time to quit.
+pygame.quit()
