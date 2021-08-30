@@ -10,8 +10,7 @@ button_start_time = 0
 clock = pygame.time.Clock()
 mainScreen = pygame.display.set_mode([300, 300])
 pygame.display.set_caption('Cookie Clicker')
-# cookie = pygame.image.load('cookiez.png')
-# cookie2 = pygame.image.load('cookiez2.png')
+# cookie = pygame.image.load('cookiez2.png')
 
 running = True
 while running:
