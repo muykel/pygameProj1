@@ -2,25 +2,48 @@ import pygame
 import math
 from pygame.locals import *
 
+# next time make rinp and laserp objects instead of using them all as global variables
+
 pygame.init()
 display_x, display_y = 500, 500
 mainScreen = pygame.display.set_mode([display_x, display_y])
 pygame.display.set_caption('Testing Window')
 icon = pygame.image.load('dragonicon.png')
 pygame.display.set_icon(icon)
-cookie = pygame.image.load('cookiez.png')
+rinp = pygame.image.load('rinp_1_29.png')
+laserp = pygame.image.load('red-beam-png-2_12.png')
 
-global cookieX, cookieY
-cookieX = display_x * 0.45
-cookieY = display_y * 0.8
+global xval, yval
+xval, yval = 75, 75
 
-def moveCookie(val, dir):
-    global cookieX
-    global cookieY
+global xlas, ylas
+xlas = xval+130
+ylas = yval+40
+
+def moveImg(val, dir):
+    global xval
+    global yval
+    global xlas
+    global ylas
     if(dir.lower()=="x"):
-        cookieX+=val
+        xval+=val
+        ylas+=val
     elif(dir.lower()=="y"):
-        cookieY+=val
+        yval+=val
+        ylas+=val
+
+def shootLaser():
+    global xval
+    global yval
+    global xlas
+    global ylas
+    xlas = xval+130
+    ylas = yval+40
+    for i in range(50):
+        xlas+=5
+        mainScreen.blit(laserp, (xlas, ylas))
+        pygame.display.update() 
+        pygame.time.wait(3)
 
 running = True
 while running:
@@ -29,16 +52,16 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                print("spacebar was pressed") #test
+                shootLaser()
             if event.key == pygame.K_w:
-                moveCookie(-5,"y")
+                moveImg(-5,"y")
             if event.key == pygame.K_s:
-                moveCookie(5,"y")
+                moveImg(5,"y")
             if event.key == pygame.K_a:
-                moveCookie(-5,"x")
+                moveImg(-5,"x")
             if event.key == pygame.K_d:
-                moveCookie(5,"x")
-    mainScreen.fill((0, 100, 255))
-    mainScreen.blit(cookie, (cookieX, cookieY))
+                moveImg(5,"x")
+    mainScreen.fill((0, 150, 255))
+    mainScreen.blit(rinp, (xval, yval))
     pygame.display.update() 
 
