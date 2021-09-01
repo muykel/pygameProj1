@@ -1,5 +1,4 @@
 import pygame
-import math
 from pygame.locals import *
 
 # next time make rinp and laserp objects instead of using them all as global variables
