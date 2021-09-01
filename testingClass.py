@@ -21,10 +21,6 @@ def moveCookie(val, dir):
         cookieX+=val
     elif(dir.lower()=="y"):
         cookieY+=val
-    else:
-        print("dimensions must on the X or Y plane")
-    mainScreen.blit(cookie, (cookieX, cookieY))
-    pygame.display.update()
 
 running = True
 while running:
@@ -33,20 +29,16 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                print("spacebar was pressed")
+                print("spacebar was pressed") #test
             if event.key == pygame.K_w:
                 moveCookie(-5,"y")
-                print("w")
             if event.key == pygame.K_s:
                 moveCookie(5,"y")
-                print("s")
             if event.key == pygame.K_a:
                 moveCookie(-5,"x")
-                print("a")
             if event.key == pygame.K_d:
                 moveCookie(5,"x")
-                print("d")
     mainScreen.fill((0, 100, 255))
-    mainScreen.blit(cookie, (0, 0))
+    mainScreen.blit(cookie, (cookieX, cookieY))
     pygame.display.update() 
 
