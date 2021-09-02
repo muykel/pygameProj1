@@ -12,12 +12,21 @@ pygame.display.set_icon(icon)
 rinp = pygame.image.load('rinp_1_29.png')
 laserp = pygame.image.load('red-beam-png-2_12.png')
 
-global xval, yval
 xval, yval = 75, 75
 
-global xlas, ylas
-xlas = xval+130
-ylas = yval+40
+class spriteInfo:
+    def __init__(self, xcoord, ycoord):
+        self.xcoord = xcoord
+        self.ycoord = ycoord
+
+    def change_x(self, val):
+        self.xcoord+=val
+        
+    def change_y(self, val):
+        self.ycoord+=val
+
+rinp = spriteInfo(xval, yval)
+laserp = spriteInfo(xval+130, yval+40)
 
 def moveImg(val, dir):
     global xval
@@ -25,11 +34,10 @@ def moveImg(val, dir):
     global xlas
     global ylas
     if(dir.lower()=="x"):
-        xval+=val
-        ylas+=val
+        rinp.change_x(val)
     elif(dir.lower()=="y"):
-        yval+=val
-        ylas+=val
+        rinp.change_y(val)
+    ylas+=val
 
 def shootLaser():
     global xval
