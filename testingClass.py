@@ -1,18 +1,16 @@
 import pygame
 from pygame.locals import *
 
-# next time make rinp and laserp objects instead of using them all as global variables
-
 pygame.init()
+
 display_x, display_y = 500, 500
+xval, yval = 75, 75
 mainScreen = pygame.display.set_mode([display_x, display_y])
 pygame.display.set_caption('Testing Window')
-icon = pygame.image.load('dragonicon.png')
-pygame.display.set_icon(icon)
-rinp = pygame.image.load('rinp_1_29.png')
-laserp = pygame.image.load('red-beam-png-2_12.png')
-
-xval, yval = 75, 75
+rinpic = pygame.image.load('rinp_1_29.png')
+laserpic = pygame.image.load('red-beam-png-2_12.png')
+iconpic = pygame.image.load('dragonicon.png')
+pygame.display.set_icon(iconpic)
 
 class spriteInfo:
     def __init__(self, xcoord, ycoord):
@@ -26,29 +24,20 @@ class spriteInfo:
         self.ycoord+=val
 
 rinp = spriteInfo(xval, yval)
-laserp = spriteInfo(xval+130, yval+40)
+laserp = spriteInfo(xval + 130, yval + 40)
 
 def moveImg(val, dir):
-    global xval
-    global yval
-    global xlas
-    global ylas
     if(dir.lower()=="x"):
         rinp.change_x(val)
     elif(dir.lower()=="y"):
         rinp.change_y(val)
-    ylas+=val
 
 def shootLaser():
-    global xval
-    global yval
-    global xlas
-    global ylas
-    xlas = xval+130
-    ylas = yval+40
+    laserp.xcoord = rinp.xcoord + 130
+    laserp.ycoord = rinp.ycoord + 40
     for i in range(50):
-        xlas+=5
-        mainScreen.blit(laserp, (xlas, ylas))
+        laserp.change_x(5)
+        mainScreen.blit(laserpic, (laserp.xcoord, laserp.ycoord))
         pygame.display.update() 
         pygame.time.wait(3)
 
@@ -69,6 +58,5 @@ while running:
             if event.key == pygame.K_d:
                 moveImg(5,"x")
     mainScreen.fill((0, 150, 255))
-    mainScreen.blit(rinp, (xval, yval))
-    pygame.display.update() 
-
+    mainScreen.blit(rinpic, (rinp.xcoord, rinp.ycoord))
+    pygame.display.update()
